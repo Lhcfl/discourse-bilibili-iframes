@@ -48,19 +48,37 @@ export default apiInitializer((api) => {
    * @arg {HTMLElement} onebox
    */
   function renderMusic163(onebox) {
-    const src = onebox?.getAttribute("data-onebox-src");
-    const bvid = src?.match(
-      /^https:\/\/music.163.com\/[\s\S]*song\?id=([0-9]+)/
-    );
-    if (bvid && bvid[1]) {
-      let link = `//music.163.com/outchain/player?type=2&id=${bvid[1]}&auto=0&height=66`;
+    const src = getUrl(onebox);
+    if (!src) {
+      return;
+    }
+    const id =
+      src?.match(/^https:\/\/music.163.com\/[\s\S]*song\?id=([0-9]+)/) ||
+      src.match(/^https:\/\/*.music.163.com\/.\/song\/([0-9]+)/);
+    if (id && id[1]) {
+      let link = `//music.163.com/outchain/player?type=2&id=${id[1]}&auto=0&height=66`;
       const ifr = document.createElement("iframe");
       ifr.setAttribute("src", link);
-      ifr.setAttribute("width", 330);
+      ifr.classList.add("music163-iframe");
       ifr.setAttribute("height", 86);
       ifr.setAttribute("allowfullscreen", "false");
       ifr.setAttribute("frameborder", "no");
-      onebox.appendChild(ifr);
+
+      if (onebox.tagName === "A") {
+        const container = document.createElement("div");
+        container.classList.add("iframe-container");
+        const title = document.createElement("div");
+        title.classList.add("iframe-title");
+        onebox.replaceWith(container);
+        container.appendChild(ifr);
+        container.appendChild(title);
+        title.appendChild(onebox);
+      } else {
+        const container = document.createElement("div");
+        container.classList.add("iframe-container");
+        container.appendChild(ifr);
+        onebox.appendChild(container);
+      }
       return true;
     }
   }

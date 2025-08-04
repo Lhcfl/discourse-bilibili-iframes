@@ -1,11 +1,14 @@
 // Theme's SCSS
 
-.bilibili-container {
+.cooked .iframe-container {
   .bilibili-iframe {
     width: 100%;
     aspect-ratio: 16/9;
   }
-  .bilibili-title {
+  .iframe-title {
     text-align: center;
+  }
+  .music163-iframe {
+    width: 100%;
   }
 }
