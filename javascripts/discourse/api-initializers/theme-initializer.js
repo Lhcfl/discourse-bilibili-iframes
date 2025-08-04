@@ -37,6 +37,7 @@ export default apiInitializer((api) => {
       onebox.replaceWith(container);
       helper.renderGlimmer(container, BilibiliPlayer, {
         src: link,
+        url: src,
         title: title?.innerText ?? src,
       });
       return true;

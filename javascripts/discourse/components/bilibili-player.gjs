@@ -7,7 +7,7 @@ export const BilibiliPlayer = <template>
       frameborder="no"
     />
     <div class="bilibili-title">
-      <a href={{@data.src}}>{{@data.title}}</a>
+      <a href={{@data.url}}>{{@data.title}}</a>
     </div>
   </div>
 </template>;
