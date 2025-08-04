@@ -1,0 +1,5 @@
+en:
+  theme_metadata:
+    description: 为 Bilibili 等中文网站生成 iframe
+    settings:
+      example_setting: A description of a setting.
